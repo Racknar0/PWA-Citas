@@ -1,6 +1,7 @@
 {
     "name": "APV",
     "short_name": "APV",
+    "description": "APV PWA",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#D41872",
