@@ -2,7 +2,7 @@
     "name": "APV",
     "short_name": "APV",
     "description": "APV PWA",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#D41872",
     "theme_color": "#D41872",
@@ -12,6 +12,11 @@
             "src": "img/icons/Icon-72",
             "type": "image/png",
             "sizes": "72x72"
+        },
+        {
+            "src": "img/icons/Icon-96",
+            "type": "image/png",
+            "sizes": "96x96"
         },
         {
             "src": "img/icons/Icon-120.png",
