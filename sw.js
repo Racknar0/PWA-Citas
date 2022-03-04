@@ -3,10 +3,13 @@ const nombreCache = 'apv-v1';
 const archivos = [
     './',
     './index.html',
+    './error.html',
     './css/bootstrap.css',
     './css/styles.css',
     './js/app.js',
-    './js/apv.js'
+    './js/apv.js',
+     './manifest.json', 
+     './img/icons'
 ];
 
 
@@ -21,6 +24,7 @@ self.addEventListener('install', e => {
                 console.log('cacheando');
                 cache.addAll(archivos);
             })
+            .catch ( () => catches.match('error.html') )
     )
 });
 
@@ -33,5 +37,12 @@ self.addEventListener('activate', e => {
 
 // Evento fetch para descargar archivos estaticos
 self.addEventListener('fetch', e => {
-    console.log('Fetch....', e)
+    console.log('Fetch....', e);
+
+    e.respondWith(
+
+        //! leer cache
+        caches.match(e.request)
+        .then(cacheResponse => (cacheResponse ? cacheResponse : caches.match('error.html')))
+    )
 })
