@@ -1,5 +1,5 @@
 <h1 align="center">Progressive Web App de citas Veterinarias</h1>
-<h3 align="center">Recuerda instalarla en la parte superior del navegador, luego de visitada funciona sin internet 🌟.</h3>
+<h3 align="center">Recuerda abrir con firefox e instalarla en la parte superior del navegador, luego de visitada funciona sin internet 🌟.</h3>
 
 
 <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img

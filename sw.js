@@ -1,5 +1,5 @@
 //Archivos en cache
-const nombreCache = 'apv-v5';
+const nombreCache = 'apv-v6';
 const archivos = [
     './',
     './index.html',
@@ -35,12 +35,12 @@ self.addEventListener('activate', e => {
     //!borrar cache
     e.waitUntil(
         caches.keys()
-        /* .then( keys  => {
+        .then( keys  => {
             return Promise.all(
                 keys.filter( key => key !== nombreCache )
                     .map( key => caches.delete(key) ) //! borras las versiones anteriores
             )
-        }) */
+        })
     )
     
 })
