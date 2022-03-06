@@ -1,6 +1,3 @@
-Proyecto creado usando las tecnologías HTML, SCC, JAVASCRIPT poniendo en practica Prototypes de JS
-
-
 <h1 align="center">Progressive Web App de citas Veterinarias</h1>
 <h3 align="center">Recuerda instalarla en la parte superior del navegador, luego de visitada funciona sin internet 🌟.</h3>
 
