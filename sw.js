@@ -1,6 +1,6 @@
 //Archivos en cache
-const nombreCache = 'apv-v6';
-const archivos = [
+
+const CACHE_EMENTS = [
     './',
     './index.html',
     './error.html',
@@ -12,9 +12,9 @@ const archivos = [
      './img/icons'
 ];
 
-
+const CACHE_NAME = 'apv-v7';
 // Cuando se instala el serviceWorker
-self.addEventListener('install', e => {
+/* self.addEventListener('install', e => {
     console.log('Instalado el serviceWorker');
 
     //!creando cache
@@ -28,7 +28,25 @@ self.addEventListener('install', e => {
     )
 });
 
-//Activar el serviceWorker
+ */
+/************** ( 'INSTALAR SERVICE WORKER' ) **************/
+
+self.addEventListener('install', (e) => {
+
+    console.log('Instalado el serviceWorker');
+    e.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            cache
+                .addAll(CACHE_EMENTS)
+                .then(() => {
+                    self.skipWaiting();
+                })
+                .catch(console.log);
+        })
+    );
+});
+
+/* //Activar el serviceWorker
 self.addEventListener('activate', e => {
     console.log('Service Worker Activado');
 
@@ -43,8 +61,33 @@ self.addEventListener('activate', e => {
         })
     )
     
-})
+}) */
 
+
+/************** ( 'BORRAR CACHE Y ACTIVAR SERVICE WORKER' ) **************/
+
+self.addEventListener('activate', (e) => {
+    const cacheWhitelist = [CACHE_NAME];
+
+    e.waitUntil(
+        caches
+            .keys()
+            .then((cacheNames) => {
+                return Promise.all(
+                    cacheNames.map((cacheName) => {
+                        return (
+                            cacheWhitelist.indexOf(cacheName) === -1 &&
+                            caches.delete(cacheName)
+                        );
+                    })
+                );
+            })
+            .then(() => self.clients.claim())
+    );
+});
+
+
+/* 
 // Evento fetch para descargar archivos estaticos
 self.addEventListener('fetch', e => {
     console.log('Fetch....', e);
@@ -55,4 +98,18 @@ self.addEventListener('fetch', e => {
         caches.match(e.request)
         .then(cacheResponse => (cacheResponse ? cacheResponse : caches.match('error.html')))
     )
-})
+}) */
+
+/************** ( 'FETCH SERVICE WORKER para descargar archivos estaticos' ) **************/
+
+self.addEventListener('fetch', (e) => {
+    console.log(e.request);
+    e.respondWith(
+        caches.match(e.request).then((res) => {
+            if (res) {
+                return res;
+            }
+            return fetch(e.request);
+        })
+    )
+});
